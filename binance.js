@@ -152,6 +152,7 @@ class binanceClass {
     this.quantityProc = 0;
     this.leverageProc = 0;
   }
+  // Dmytro | 30/06/21
   
   binanceConnect() {
     console.log(this.param);
@@ -394,6 +395,13 @@ class binanceClass {
     this.param = "";
     this.pos = 1;
   }
+
+  BinanceAccountInfoFuturesV2account() {
+    this.command = this.typeExchange + "/v2/account";
+    this.param = "";
+    this.pos = 2;
+  }
+
     BinanceOpenPositon() {
     this.command = this.typeExchange + "/v2/positionRisk";
     this.param = "";
