@@ -28,7 +28,8 @@ class comCommand {
       if (this.comrow != undefined) {
         this.message = ss.getSheetByName(this.comlist).getRange(this.comrow).getValue();
 
-      } else if (this.commassiv != undefined) {
+      } 
+      else if (this.commassiv != undefined) {
         let t = ss.getSheetByName(this.comlist).getRange(this.commassiv).getValues();
         this.message = '';
 
