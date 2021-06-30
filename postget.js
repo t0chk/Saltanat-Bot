@@ -10,11 +10,19 @@ var filterSheet = ss.getSheetByName("filter");
 var com = ss.getSheetByName("com");
 //// функция которое принимает запросы по web hook
 function doPost(e) {
+  let res = JSON.stringify(e.postData.contents);
+  loggi.messageAnswerExchange = (res).toString();
+  loggi.addLog();
+  teleg.answerMarket = (res).toString();
+  teleg.telegramSendLog();
   if (e.postData.type == "text/plain") {
     let message = e.postData.contents;
-    comCommands.message = message;
-    comCommands.comCheck();
-    message = comCommands.message;
-    obrabotkaMesageClass(message)
+    let status=settingSheet.getRange("B5").getValue();
+    if (status=="выкл"){
+      obrabotkaMesageClass(message)
+    }
+    else if (status=="вкл"){
+      obrabotkaMesageClassTurbo(message)
+    }
   }
 }
