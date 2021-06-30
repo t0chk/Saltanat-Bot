@@ -349,6 +349,12 @@ function allorderTer() {
   
 }
 
+function printResponse(st,col,res){
+  terSheet.getRange(st++,col).setValue("responseCode: "+res.responseCode);
+  terSheet.getRange(st++,col).setValue("indexban: " +res.indexban);
+  if(res.responseContentText!=undefined){terSheet.getRange(st++,col).setValue("ответ: " + res.responseContentText)};
+}
+
 function AllPositionTerminal(){
     terSheet.getRange(1,9).setValue("Позиции")
     let mar = terSheet.getRange("J1").getValue();
