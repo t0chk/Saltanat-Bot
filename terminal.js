@@ -348,3 +348,119 @@ function allorderTer() {
   }
   
 }
+
+function AllPositionTerminal(){
+    terSheet.getRange(1,9).setValue("Позиции")
+    let mar = terSheet.getRange("J1").getValue();
+    let count = terSheet.getLastRow()
+    terSheet.getRange(2,9,count,28).clear({contentsOnly: true})
+    let res=new marketResponseClass();
+    try{
+      if (mar=="binancefru"){
+        binanceFru.BinanceAccountInfoFuturesV2account()
+        res=binanceFru.binanceConnect()
+        console.log(res)
+        let positions=res.positions
+        let st=3
+        let count =positions.length
+        terSheet.getRange(2,9 ).setValue("symbol")
+        terSheet.getRange(2,10).setValue("positionSide")
+        terSheet.getRange(2,11).setValue("positionAmt")
+        terSheet.getRange(2,12).setValue("notional")
+        terSheet.getRange(2,13).setValue("entryPrice")
+        terSheet.getRange(2,14).setValue("leverage")
+        terSheet.getRange(2,15).setValue("unrealizedProfit")
+        terSheet.getRange(2,16).setValue("maintMargin")
+        terSheet.getRange(2,17).setValue("initialMargin")
+        terSheet.getRange(2,18).setValue("positionInitialMargin")
+        terSheet.getRange(2,19).setValue("openOrderInitialMargin")
+        terSheet.getRange(2,20).setValue("maxNotional")
+        terSheet.getRange(2,21).setValue("isolated")
+        terSheet.getRange(2,22).setValue("isolatedWallet")
+        terSheet.getRange(2,23).setValue("updateTime")
+        let v=""
+        for (let i=0;i<count;i++){
+            v=positions[i]
+            if (v.positionAmt!=0){
+              terSheet.getRange(st,9) .setValue(v.symbol)
+              terSheet.getRange(st,10).setValue(v.positionSide)
+              terSheet.getRange(st,11).setValue(v.positionAmt)
+              terSheet.getRange(st,12).setValue(v.notional)
+              terSheet.getRange(st,13).setValue(v.entryPrice)
+              terSheet.getRange(st,14).setValue(v.leverage)
+              terSheet.getRange(st,15).setValue(v.unrealizedProfit)
+              terSheet.getRange(st,16).setValue(v.maintMargin)
+              terSheet.getRange(st,17).setValue(v.initialMargin)
+              terSheet.getRange(st,18).setValue(v.positionInitialMargin)
+              terSheet.getRange(st,19).setValue(v.openOrderInitialMargin)
+              terSheet.getRange(st,20).setValue(v.maxNotional)
+              terSheet.getRange(st,21).setValue(v.isolated)
+              terSheet.getRange(st,22).setValue(v.isolatedWallet)
+              terSheet.getRange(st,23).setValue(v.updateTime)
+              st++
+            }
+        }
+        // terSheet.getRange(st++,9).setValue("responseCode: "+res.responseCode)
+        // terSheet.getRange(st++,9).setValue("indexban: " +res.indexban)
+        // terSheet.getRange(st++,9).setValue("ответ: " + res.responseContentText)
+        printResponse(st,9,res)
+      }
+      else if (mar=="binanceftu"){
+        binanceFtu.BinanceAccountInfoFuturesV2account()
+        res=binanceFtu.binanceConnect()
+        console.log(res)
+        let positions=res.positions
+        let st=3
+        let count =positions.length
+        terSheet.getRange(2,9 ).setValue("symbol")
+        terSheet.getRange(2,10).setValue("positionSide")
+        terSheet.getRange(2,11).setValue("positionAmt")
+        terSheet.getRange(2,12).setValue("notional")
+        terSheet.getRange(2,13).setValue("entryPrice")
+        terSheet.getRange(2,14).setValue("leverage")
+        terSheet.getRange(2,15).setValue("unrealizedProfit")
+        terSheet.getRange(2,16).setValue("maintMargin")
+        terSheet.getRange(2,17).setValue("initialMargin")
+        terSheet.getRange(2,18).setValue("positionInitialMargin")
+        terSheet.getRange(2,19).setValue("openOrderInitialMargin")
+        terSheet.getRange(2,20).setValue("maxNotional")
+        terSheet.getRange(2,21).setValue("isolated")
+        terSheet.getRange(2,22).setValue("isolatedWallet")
+        terSheet.getRange(2,23).setValue("updateTime")
+        let v=""
+        for (let i=0;i<count;i++){
+            v=positions[i]
+            if (v.positionAmt!=0){
+              terSheet.getRange(st,9) .setValue(v.symbol)
+              terSheet.getRange(st,10).setValue(v.positionSide)
+              terSheet.getRange(st,11).setValue(v.positionAmt)
+              terSheet.getRange(st,12).setValue(v.notional)
+
+            terSheet.getRange(st,13).setValue(v.entryPrice)
+            terSheet.getRange(st,14).setValue(v.leverage)
+            terSheet.getRange(st,15).setValue(v.unrealizedProfit)
+            terSheet.getRange(st,16).setValue(v.maintMargin)
+            terSheet.getRange(st,17).setValue(v.initialMargin)
+            terSheet.getRange(st,18).setValue(v.positionInitialMargin)
+            terSheet.getRange(st,19).setValue(v.openOrderInitialMargin)
+            terSheet.getRange(st,20).setValue(v.maxNotional)
+            terSheet.getRange(st,21).setValue(v.isolated)
+            terSheet.getRange(st,22).setValue(v.isolatedWallet)
+            terSheet.getRange(st,23).setValue(v.updateTime)
+            st++
+          }
+      }
+      // terSheet.getRange(st++,9).setValue("responseCode: "+res.responseCode)
+      // terSheet.getRange(st++,9).setValue("indexban: " +res.indexban)
+      // terSheet.getRange(st++,9).setValue("ответ: " + res.responseContentText)
+      printResponse(st,9,res)
+    }
+  }
+  catch(e){
+    console.error('Ошибка при парсинге ответа биржи:', e.message);
+    terSheet.getRange("I3").setValue('Ошибка при парсинге ответа биржи: '+(e).toString())
+    terSheet.getRange("I4").setValue("responseCode: "+res.responseCode)
+    terSheet.getRange("I5").setValue("indexban: " +res.indexban)
+    terSheet.getRange("I6").setValue("ответ: " + res.responseContentText)
+  }
+}
