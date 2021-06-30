@@ -24,6 +24,15 @@ class telegram {
       UrlFetchApp.fetch(urlEncoded, this.params);
     }
   }
+  telegramSendText() {
+    if (this.status == "вкл") {
+
+
+      this.message = this.url + "/sendMessage?chat_id=" + this.id + "&text=" + this.text;
+      let urlEncoded = encodeURI(this.message);
+      UrlFetchApp.fetch(urlEncoded, this.params);
+    }
+  }
   telegramSend() {
     if (this.status == "вкл") {
       this.message = this.url + "/sendMessage?chat_id=" + this.id + "&text=" + this.text;
